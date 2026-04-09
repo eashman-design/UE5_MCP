@@ -1,0 +1,24 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "FriendlyName": "UE5 MCP",
+  "Description": "Model Context Protocol server for Unreal Engine 5 Editor control via AI.",
+  "Category": "Editor",
+  "CreatedBy": "UE5-MCP Contributors",
+  "CreatedByURL": "https://github.com/eashman-design/UE5_MCP",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": false,
+  "IsBetaVersion": true,
+  "IsExperimentalVersion": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "UE5MCP",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
+    }
+  ]
+}

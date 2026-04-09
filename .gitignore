@@ -1,0 +1,33 @@
+# Unreal Engine build artifacts
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+.vs/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+dist/
+build/
+*.egg-info/
+.venv/
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# JetBrains
+.idea/
+
+# VSCode
+.vscode/
+
+# Node (just in case)
+node_modules/
