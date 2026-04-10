@@ -1,7 +1,7 @@
 import json
 from mcp.types import Tool, TextContent
 from pydantic import BaseModel, Field
-from typing import Literal
+from typing import Any, Literal
 from ue5_mcp.client import EditorClient
 
 
@@ -33,7 +33,7 @@ TOOLS: list[Tool] = [
 TOOL_NAMES = {t.name for t in TOOLS}
 
 
-async def handle(name: str, client: EditorClient, arguments: dict) -> list[TextContent]:
+async def handle(name: str, client: EditorClient, arguments: dict[str, Any]) -> list[TextContent]:
     if name == "start_pie":
         inp = StartPIEInput.model_validate(arguments)
         data = await client.post("/pie/start", {"mode": inp.mode})

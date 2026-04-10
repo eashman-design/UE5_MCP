@@ -1,7 +1,7 @@
 import json
 from mcp.types import Tool, TextContent
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Any, Optional
 from ue5_mcp.client import EditorClient
 
 
@@ -53,14 +53,14 @@ TOOLS: list[Tool] = [
 TOOL_NAMES = {t.name for t in TOOLS}
 
 
-async def handle(name: str, client: EditorClient, arguments: dict) -> list[TextContent]:
+async def handle(name: str, client: EditorClient, arguments: dict[str, Any]) -> list[TextContent]:
     if name == "list_actors":
         data = await client.get("/actors/list")
         return [TextContent(type="text", text=json.dumps(data, indent=2))]
 
     if name == "spawn_actor":
         inp = SpawnActorInput.model_validate(arguments)
-        body: dict = {"class_path": inp.class_path}
+        body: dict[str, Any] = {"class_path": inp.class_path}
         if inp.name:
             body["name"] = inp.name
         if inp.location:

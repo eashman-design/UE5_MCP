@@ -1,5 +1,6 @@
-from mcp import Server
+from mcp.server import Server
 from mcp.types import Tool, TextContent
+from typing import Any
 from ue5_mcp.config import Config
 from ue5_mcp.client import EditorClient
 import ue5_mcp.tools.actors as actors_tools
@@ -33,7 +34,7 @@ def create_server(config: Config) -> Server:
         return tools
 
     @server.call_tool()
-    async def call_tool(name: str, arguments: dict) -> list[TextContent]:
+    async def call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent]:
         for module in all_tool_modules:
             if name in module.TOOL_NAMES:
                 return await module.handle(name, client, arguments)

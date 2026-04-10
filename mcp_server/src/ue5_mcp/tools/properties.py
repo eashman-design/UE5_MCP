@@ -1,6 +1,7 @@
 import json
 from mcp.types import Tool, TextContent
 from pydantic import BaseModel, Field
+from typing import Any
 from ue5_mcp.client import EditorClient
 
 
@@ -43,7 +44,7 @@ TOOLS: list[Tool] = [
 TOOL_NAMES = {t.name for t in TOOLS}
 
 
-async def handle(name: str, client: EditorClient, arguments: dict) -> list[TextContent]:
+async def handle(name: str, client: EditorClient, arguments: dict[str, Any]) -> list[TextContent]:
     if name == "get_property":
         inp = GetPropertyInput.model_validate(arguments)
         data = await client.post("/property/get", {

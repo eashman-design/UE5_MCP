@@ -1,7 +1,7 @@
 import json
 from mcp.types import Tool, TextContent
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Any, Optional
 from ue5_mcp.client import EditorClient
 
 
@@ -30,10 +30,10 @@ TOOLS: list[Tool] = [
 TOOL_NAMES = {t.name for t in TOOLS}
 
 
-async def handle(name: str, client: EditorClient, arguments: dict) -> list[TextContent]:
+async def handle(name: str, client: EditorClient, arguments: dict[str, Any]) -> list[TextContent]:
     if name == "get_log":
         inp = GetLogInput.model_validate(arguments)
-        params: dict = {"count": inp.count or 200}
+        params: dict[str, Any] = {"count": inp.count or 200}
         if inp.category:
             params["category"] = inp.category
         data = await client.get("/logs/get", **params)

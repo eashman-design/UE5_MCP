@@ -1,7 +1,7 @@
 import json
 from mcp.types import Tool, TextContent
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Any, Optional
 from ue5_mcp.client import EditorClient
 
 
@@ -35,7 +35,7 @@ TOOLS: list[Tool] = [
 TOOL_NAMES = {t.name for t in TOOLS}
 
 
-async def handle(name: str, client: EditorClient, arguments: dict) -> list[TextContent]:
+async def handle(name: str, client: EditorClient, arguments: dict[str, Any]) -> list[TextContent]:
     if name == "get_actor_transform":
         inp = GetTransformInput.model_validate(arguments)
         data = await client.post("/transform/get", {"name": inp.name})
@@ -43,7 +43,7 @@ async def handle(name: str, client: EditorClient, arguments: dict) -> list[TextC
 
     if name == "set_actor_transform":
         inp = SetTransformInput.model_validate(arguments)
-        body: dict = {"name": inp.name}
+        body: dict[str, Any] = {"name": inp.name}
         if inp.location is not None:
             body["location"] = inp.location
         if inp.rotation is not None:
